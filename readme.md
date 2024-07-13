@@ -14,7 +14,6 @@ PersonalSkill Portal is a full-stack web application built with Flask and React 
 ## Frontend
 
 - **React**
-- **Redux** (optional)
 
 React is used as the frontend JavaScript library for building user interfaces.
 
@@ -27,7 +26,7 @@ Flask is a lightweight Python web framework used for building backend APIs and s
 
 ## Database
 
-- **SQL Server** (optional)
+- **SQL Server** 
 
 SQL Server for the relational database management system used with SQLAlchemy in the Flask backend.
 
