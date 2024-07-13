@@ -132,3 +132,6 @@ yarn-error.log*
 
 # Next.js
 out
+
+publickey
+publickey.pub
