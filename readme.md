@@ -13,5 +13,5 @@ PersonalSkill Portal is a full-stack web application built with Flask and React 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/username/repo.git
+   git clone https://github.com/mittamahesh/PersonaSkill-Portal.git
    cd repo
