@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import API_URL from '../../config';
 
 const Dashboard = () => {
   const [userdata, setUserdata] = useState({});
@@ -23,7 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dashboardResponse = await fetch('http://localhost:5000/dashboard', {
+        const dashboardResponse = await fetch(`${API_URL}/dashboard`, {
           method: 'GET',
           headers: {
             'Authorization': localStorage.getItem('token'),
@@ -43,7 +44,7 @@ const Dashboard = () => {
           profile_image: dashboardData.profile_image
         });
 
-        const skillsResponse = await fetch('http://localhost:5000/getSkills', {
+        const skillsResponse = await fetch(`${API_URL}/getSkills`, {
           method: 'GET',
           headers: {
             'Authorization': localStorage.getItem('token'),
@@ -54,7 +55,7 @@ const Dashboard = () => {
         setSkills(skillsData);
 
 
-        const projectResponse = await fetch('http://localhost:5000/getProjects', {
+        const projectResponse = await fetch(`${API_URL}/getProjects`, {
           method: 'GET',
           headers: {
             'Authorization': localStorage.getItem('token'),
@@ -101,7 +102,7 @@ const Dashboard = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData)
-    fetch('http://localhost:5000/updateProfile', {
+    fetch( `${API_URL}/updateProfile`, {
       method: 'PUT',
       headers: {
         'Authorization': localStorage.getItem('token'),
@@ -183,7 +184,7 @@ const Dashboard = () => {
 //         </html>
 //       `;
 //     console.log(profileHTMLWithCSS)
-    await fetch('http://localhost:5000/downloadProfile', {
+    await fetch(`${API_URL}/downloadProfile`, {
       method: 'POST',
       headers: {
         'Authorization': localStorage.getItem('token'),
@@ -213,7 +214,7 @@ const Dashboard = () => {
     const skillname = e.target.skillname.value;
     const skilllevel = e.target.skilllevel.value;
 
-    fetch('http://localhost:5000/addSkill', {
+    fetch(`${API_URL}/addSkill`, {
       method: 'POST',
       headers: {
         'Authorization': localStorage.getItem('token'),
@@ -233,7 +234,7 @@ const Dashboard = () => {
     const project_description = e.target.projectdescription.value;
     const project_link = e.target.projectlink.value;
 
-    fetch('http://localhost:5000/addProject', {
+    fetch(`${API_URL}/addProject`, {
       method: 'POST',
       headers: {
         'Authorization': localStorage.getItem('token'),

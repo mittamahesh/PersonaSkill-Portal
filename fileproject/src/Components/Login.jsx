@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import API_URL from '../../config';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Login = () => {
 
         const data = { username, password };
 
-        fetch('http://localhost:5000/login', {
+        fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),

@@ -12,7 +12,9 @@ from weasyprint import HTML
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allowing all origins for now. You can restrict this to specific domains.
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://SA:Mitta132@localhost/mydb?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///myapp.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
