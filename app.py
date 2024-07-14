@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, send_file, render_template, make_response
+from flask import Flask, jsonify, request, send_file, render_template, make_response, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
@@ -6,6 +6,7 @@ import jwt
 import datetime
 import base64
 import pdfkit
+import os
 from weasyprint import HTML
  
 
@@ -13,7 +14,7 @@ from weasyprint import HTML
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://SA:Mitta132@localhost/mydb?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///myapp.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisismysecretkey'
 
@@ -94,6 +95,15 @@ class Projects(db.Model):
 
 # with app.app_context():
 #     db.create_all()
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(os.path.join('fileproject', 'dist', path)):
+        return send_from_directory(os.path.join('fileproject', 'dist'), path)
+    else:
+        return send_from_directory(os.path.join('fileproject', 'dist'), 'index.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -378,4 +388,4 @@ def download_pdf():
         return jsonify({'message': 'Token is invalid!'}, 401, {'WWW-dataenticate': 'Basic realm="Login required!"'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
