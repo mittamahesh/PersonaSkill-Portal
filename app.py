@@ -95,8 +95,8 @@ class Projects(db.Model):
             'user_id': self.user_id
         }
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 
 @app.route('/', defaults={'path': ''})
